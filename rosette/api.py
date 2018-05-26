@@ -484,6 +484,7 @@ class EndpointCaller(object):
                 'POST', url, files=files, headers=headers, params=payload)
             prepared_request = self.api.session.prepare_request(request)
             settings = self.api.session.merge_environment_settings(prepared_request.url, os.environ.__dict__, {}, None, {})
+            print('setttings', settings)
             response = self.api.session.send(prepared_request, **settings)
             rdata = response.content
             response_headers = {"responseHeaders": dict(response.headers)}
@@ -614,7 +615,7 @@ class API(object):
         prepared_request = self.session.prepare_request(request)
         # Take into account environment settings, e.g. HTTP_PROXY and HTTPS_PROXY
         settings = self.session.merge_environment_settings(prepared_request.url, os.environ.__dict__, {}, None, {})
-
+        print('settings', settings)
         try:
             response = self.session.send(prepared_request, **settings)
             status = response.status_code
